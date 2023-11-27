@@ -15,6 +15,12 @@ namespace AndMoney {
         static System.Random random = new System.Random();
 
         #region GameObject Component
+        //拓展的显影物体
+        static public void SetExpandActive(this GameObject go, bool isActive) {
+            if (go.activeSelf != isActive) {
+                go.SetActive(isActive);
+            }
+        }
         //GameObject上添加组件，如果组件存在直接返回
         static public T AddMissingComponent<T>(this GameObject go) where T : Component {
             T comp = go.GetComponent<T>();
