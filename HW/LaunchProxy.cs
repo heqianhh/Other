@@ -14,12 +14,14 @@ namespace AndMoney {
 
         public void Update() {
 #if UNITY_EDITOR
-
+            if (Input.GetKeyDown(KeyCode.X)) {
+                Time.timeScale = 1f;
+            }
             if (Input.GetKeyDown(KeyCode.V)) {
-                Time.timeScale = 10f;
+                Time.timeScale *= 2f;
             }
             if (Input.GetKeyDown(KeyCode.C)) {
-                Time.timeScale = 1f;
+                Time.timeScale /= 2f;
             }
 
             if (Input.GetKeyDown(KeyCode.S)) {

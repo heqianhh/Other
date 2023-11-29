@@ -6,7 +6,7 @@ using UnityEngine;
 public class BaseCameraMsgDoubleFinger : BaseEventTriggerGet {
     private const float CAMERA_MAX_ORTHSIZE = 40f;
     private const float CAMERA_MIN_ORTHSIZE = 15f;
-    private const float CAMERA_MAX_VIEW = 55f;
+    private const float CAMERA_MAX_VIEW = 30f;
     private const float CAMERA_MIN_VIEW = 30f;
     private const float CAMERA_ORTHSIZE_SPEED = 2.5f;
     private const float CAMERA_CHANGE_TIME = 0.25f;
@@ -17,14 +17,14 @@ public class BaseCameraMsgDoubleFinger : BaseEventTriggerGet {
     public Vector3 EnterPos;
     public Camera camera;
     public Transform transCamera;
-    float xMinLow = -7f;
-    float xMaxLow = 7f;
-    float zMinLow = -5.3f;
-    float zMaxLow = 21f;
-    float xMinHigh = -2f;
-    float xMaxHigh = 2f;
-    float zMinHigh = 9f;
-    float zMaxHigh = 25f;
+    public float xMinLow = -7f;
+    public float xMaxLow = 7f;
+    public float zMinLow = -5.3f;
+    public float zMaxLow = 21f;
+    public float xMinHigh = -2f;
+    public float xMaxHigh = 2f;
+    public float zMinHigh = 9f;
+    public float zMaxHigh = 25f;
     public bool Wait = false;
     bool isDrag = false;
     bool isOrthographic;
@@ -196,16 +196,16 @@ public class BaseCameraMsgDoubleFinger : BaseEventTriggerGet {
         return isOrthographic ? ((camera.orthographicSize - CAMERA_MIN_ORTHSIZE) / (CAMERA_MAX_ORTHSIZE - CAMERA_MIN_ORTHSIZE)) : ((camera.fieldOfView - CAMERA_MIN_VIEW) / (CAMERA_MAX_VIEW - CAMERA_MIN_VIEW));
     }
     private float GetxMin(float rate) {
-        return Mathf.Lerp(xMinLow, xMinHigh, rate);
+        return xMinLow == xMinHigh ? xMinLow : Mathf.Lerp(xMinLow, xMinHigh, rate);
     }
     private float GetxMax(float rate) {
-        return Mathf.Lerp(xMaxLow, xMaxHigh, rate);
+        return xMaxLow == xMaxHigh ? xMaxLow : Mathf.Lerp(xMaxLow, xMaxHigh, rate);
     }
     private float GetzMin(float rate) {
-        return Mathf.Lerp(zMinLow, zMinHigh, rate);
+        return zMinLow == zMinHigh ? zMinLow : Mathf.Lerp(zMinLow, zMinHigh, rate);
     }
     private float GetzMax(float rate) {
-        return Mathf.Lerp(zMaxLow, zMaxHigh, rate);
+        return zMaxLow == zMaxHigh ? zMaxLow : Mathf.Lerp(zMaxLow, zMaxHigh, rate);
     }
     private void ChangeOrthSize(bool add = true) {
         if (camera != null) {
